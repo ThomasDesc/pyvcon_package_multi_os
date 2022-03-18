@@ -9,6 +9,8 @@ def get_surface_dict(pdb_filename, n_atoms):
         unique atom numbers), containing surface area in contact between
         pairs of atoms.
     """
+    if not os.path.isfile(pdb_filename):
+        raise ValueError("This file does not exist: {}".format(pdb_filename))
     vcon_file = run_vcon(pdb_filename, n_atoms)
     sd = dict()
     with open(vcon_file) as f:
