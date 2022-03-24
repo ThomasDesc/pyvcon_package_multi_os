@@ -8,7 +8,7 @@ with open(os.path.join(HERE, "README.md")) as f:
 
 setuptools.setup(
     name="pyvcon",
-    version="1.0.0",
+    version="1.0.1",
     author="Olivier Mailhot",
     description="Python wrapper for Vcontacts",
     long_description=README,

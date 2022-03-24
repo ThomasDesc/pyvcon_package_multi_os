@@ -24,6 +24,7 @@ def get_surface_dict(pdb_filename, n_atoms):
             if from_atom not in sd:
                 sd[from_atom] = dict()
             sd[from_atom][to_atom] = surf
+    os.remove(vcon_file)
     return sd
 
 
