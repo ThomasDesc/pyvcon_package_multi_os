@@ -4,14 +4,16 @@ import platform
 import subprocess
 
 
-def get_surface_dict(pdb_filename, n_atoms):
+def get_surface_dict(pdb_filename, n_atoms, use_precomputed=False):
     """ Returns a dict of dicts based on atom numbers (input file must have
         unique atom numbers), containing surface area in contact between
         pairs of atoms.
     """
     if not os.path.isfile(pdb_filename):
         raise ValueError("This file does not exist: {}".format(pdb_filename))
-    vcon_file = run_vcon(pdb_filename, n_atoms)
+    vcon_file = pdb_filename + ".vcon"
+    if not (use_precomputed and os.path.isfile(vcon_file)):
+        vcon_file = run_vcon(pdb_filename, n_atoms)
     sd = dict()
     with open(vcon_file) as f:
         lines = f.readlines()
@@ -24,7 +26,8 @@ def get_surface_dict(pdb_filename, n_atoms):
             if from_atom not in sd:
                 sd[from_atom] = dict()
             sd[from_atom][to_atom] = surf
-    os.remove(vcon_file)
+    if not use_precomputed:
+        os.remove(vcon_file)
     return sd
 
 
