@@ -7,7 +7,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        # os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest]
 
     steps:
       - uses: actions/checkout@v3
@@ -26,13 +27,6 @@ jobs:
         run: |
           gcc src/pyvcon/vcontacts/Vcontacts.c -o src/pyvcon/vcontacts/vcon -lm
 
-      # - name: Compile binary (Windows)
-      #   if: runner.os == 'Windows'
-      #   run: |
-      #     # Install MinGW if you want to use gcc on Windows (optional)
-      #     choco install mingw -y
-      #     gcc src/pyvcon/vcontacts/Vcontacts.c -o src/pyvcon/vcontacts/vcon.exe -lm
-
       - name: Compile with cl (Windows - MSVC)
         if: runner.os == 'Windows'
         run: |
@@ -42,11 +36,15 @@ jobs:
         run: |
           python -m build --wheel
 
-      # - name: Rename wheel (optional)
-      #   run: |
-      #     # Rename to include platform tag (example for Linux)
-      #     # You'll customize this per-platform
-      #     mv dist/*.whl dist/$(python scripts/rename_wheel.py dist/*.whl)
+      - name: Rename wheel based on platform
+        run: |
+          if [ "${{ runner.os }}" == "Linux" ]; then
+            mv dist/*.whl dist/my_package-1.0.0-cp39-cp39-linux_x86_64.whl
+          elif [ "${{ runner.os }}" == "Windows" ]; then
+            mv dist/*.whl dist/my_package-1.0.0-cp39-cp39-win_amd64.whl
+          elif [ "${{ runner.os }}" == "macOS" ]; then
+            mv dist/*.whl dist/my_package-1.0.0-cp39-cp39-macosx_10_9_x86_64.whl
+          fi
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
