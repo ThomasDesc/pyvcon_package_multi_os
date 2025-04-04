@@ -38,7 +38,7 @@ jobs:
 
       - name: Rename wheel based on platform
         run: |
-          python rename_wheel.py
+          python rename_whl.py
       # - name: Rename wheel based on platform
       #   run: |
       #     if [ "${{ runner.os }}" == "Linux" ]; then
