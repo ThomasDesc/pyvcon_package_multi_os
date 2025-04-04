@@ -21,15 +21,21 @@ jobs:
         run: |
           python -m pip install --upgrade build twine
 
-      - name: Compile binary (Linux and macOS)
+      # Compile binary (Linux and macOS)
+      - name: Compile with gcc (Linux and macOS)
         if: runner.os != 'Windows'
         run: |
           gcc src/pyvcon/vcontacts/Vcontacts.c -o src/pyvcon/vcontacts/vcon -lm
 
+      # Compile binary with cl (Windows - MSVC)
+      - name: Set up Visual Studio Build Tools (Windows)
+        if: runner.os == 'Windows'
+        uses: microsoft/setup-msbuild@v1.1
+
       - name: Compile with cl (Windows - MSVC)
         if: runner.os == 'Windows'
         run: |
-          cl /Fe:src\pyvcon\vcontacts\vcon.exe src\pyvcon\vcontacts\Vcontacts.c
+          cl /Fe:src\\pyvcon\\vcontacts\\vcon.exe src\\pyvcon\\vcontacts\\Vcontacts.c
 
       - name: Build wheel
         run: |
@@ -45,6 +51,7 @@ jobs:
           name: wheel-artifact-${{ strategy.job-index }}  # Unique name based on the run ID
           path: dist/*.whl
 
+      # Optionally, Upload to Test PyPI (uncomment if needed)
       # - name: Upload to Test PyPI
       #   env:
       #     TWINE_USERNAME: ${{ secrets.TEST_PYPI_USERNAME }}
