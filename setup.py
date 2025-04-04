@@ -1,7 +1,5 @@
 import os
-import subprocess
 from setuptools import setup, find_packages
-from setuptools.command.build_py import build_py as _build_py
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 

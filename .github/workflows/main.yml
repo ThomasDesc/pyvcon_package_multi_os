@@ -33,7 +33,7 @@ jobs:
       - name: Compile with cl (Windows - MSVC)
         if: runner.os == 'Windows'
         run: |
-          cl /Fe:src\pyvcon\vcontacts\vcon.exe src\pyvcon\vcontacts\Vcontacts.c
+          cl /Fe:src\pyvcon\vcontacts\vcon src\pyvcon\vcontacts\Vcontacts.c
 
       - name: Build wheel
         run: |
