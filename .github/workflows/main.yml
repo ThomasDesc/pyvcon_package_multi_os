@@ -36,15 +36,15 @@ jobs:
         run: |
           python -m build --wheel
 
-      - name: Rename wheel based on platform
-        run: |
-          if [ "${{ runner.os }}" == "Linux" ]; then
-            mv dist/*.whl dist/my_package-1.0.0-cp39-cp39-linux_x86_64.whl
-          elif [ "${{ runner.os }}" == "Windows" ]; then
-            mv dist/*.whl dist/my_package-1.0.0-cp39-cp39-win_amd64.whl
-          elif [ "${{ runner.os }}" == "macOS" ]; then
-            mv dist/*.whl dist/my_package-1.0.0-cp39-cp39-macosx_10_9_x86_64.whl
-          fi
+      # - name: Rename wheel based on platform
+      #   run: |
+      #     if [ "${{ runner.os }}" == "Linux" ]; then
+      #       mv dist/*.whl dist/my_package-1.0.0-cp39-cp39-linux_x86_64.whl
+      #     elif [ "${{ runner.os }}" == "Windows" ]; then
+      #       mv dist/*.whl dist/my_package-1.0.0-cp39-cp39-win_amd64.whl
+      #     elif [ "${{ runner.os }}" == "macOS" ]; then
+      #       mv dist/*.whl dist/my_package-1.0.0-cp39-cp39-macosx_10_9_x86_64.whl
+      #     fi
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
