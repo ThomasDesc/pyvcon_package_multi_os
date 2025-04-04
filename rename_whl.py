@@ -24,7 +24,7 @@ def rename_wheel():
 
     # Platform-specific suffix for the wheel file
     if current_platform == "linux":
-        suffix = "linux_x86_64"
+        suffix = "manylinux1_x86_64"
     elif current_platform == "windows":
         suffix = "win_amd64"
     elif current_platform == "darwin":
