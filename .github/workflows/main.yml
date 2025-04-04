@@ -7,8 +7,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        # os: [ubuntu-latest, windows-latest, macos-latest]
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
       - uses: actions/checkout@v3
@@ -39,15 +38,6 @@ jobs:
       - name: Rename wheel based on platform
         run: |
           python rename_whl.py
-      # - name: Rename wheel based on platform
-      #   run: |
-      #     if [ "${{ runner.os }}" == "Linux" ]; then
-      #       mv dist/*.whl dist/my_package-1.0.0-cp39-cp39-linux_x86_64.whl
-      #     elif [ "${{ runner.os }}" == "Windows" ]; then
-      #       mv dist/*.whl dist/my_package-1.0.0-cp39-cp39-win_amd64.whl
-      #     elif [ "${{ runner.os }}" == "macOS" ]; then
-      #       mv dist/*.whl dist/my_package-1.0.0-cp39-cp39-macosx_10_9_x86_64.whl
-      #     fi
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
