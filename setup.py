@@ -9,9 +9,9 @@ with open(os.path.join(HERE, "README.md")) as f:
     README = f.read()
 
 setup(
-    name="pyvcon",
+    name="pyvcon_multi_os",
     version="1.0.2",
-    author="Olivier Mailhot",
+    author="test",
     description="Python wrapper for Vcontacts",
     long_description=README,
     long_description_content_type="text/markdown",
