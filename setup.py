@@ -14,7 +14,7 @@ class build_py(_build_py):
         # Path to your C source file
         c_file = os.path.join(HERE, "src", "pyvcon", "vcontacts", "Vcontacts.c")
         out_bin = os.path.join(HERE, "src", "pyvcon", "vcontacts", "vcon")
-        subprocess.check_call(["gcc", c_file, "-o", out_bin])
+        subprocess.check_call(["gcc", c_file, "-o", out_bin, '-lm'])
 
         super().run()
 
