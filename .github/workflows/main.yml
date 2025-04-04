@@ -42,7 +42,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: wheel-artifact-${{ github.run_id }}  # Unique name based on the run ID
+          name: wheel-artifact-${{ strategy.job-index }}  # Unique name based on the run ID
           path: dist/*.whl
 
       - name: Upload to Test PyPI
