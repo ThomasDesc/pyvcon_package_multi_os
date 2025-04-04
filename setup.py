@@ -1,6 +1,5 @@
 import os
 import subprocess
-import platform
 from setuptools import setup, find_packages
 from setuptools.command.build_py import build_py as _build_py
 
@@ -10,13 +9,11 @@ with open(os.path.join(HERE, "README.md")) as f:
     README = f.read()
 
 
-# Custom build_py command to compile Vcontacts.c
 class build_py(_build_py):
     def run(self):
         # Path to your C source file
         c_file = os.path.join(HERE, "src", "pyvcon", "vcontacts", "Vcontacts.c")
-        bin_name = "vcon" if os.name == "nt" else "vcon"
-        out_bin = os.path.join(HERE, "src", "pyvcon", "vcontacts", bin_name)
+        out_bin = os.path.join(HERE, "src", "pyvcon", "vcontacts", "vcon")
         subprocess.check_call(["gcc", c_file, "-o", out_bin])
 
         super().run()
